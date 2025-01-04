@@ -21,10 +21,11 @@ export async function POST(request) {
       { text: "Please transcribe the audio." },
     ]);
 
-    // Print the response.
-    console.log(result.response.text());
-    return Response.json({ result: result.response.text() });
+    const responseText = await result.response.text();
+    console.log(responseText);
+    return Response.json({ result: responseText });
   } catch (error) {
-    return Response.json({ error });
+    console.error(error);
+    return Response.json({ error: error.message });
   }
 }
